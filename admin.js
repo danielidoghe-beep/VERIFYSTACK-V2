@@ -40,12 +40,26 @@ onAuthStateChanged(auth, async (user) => {
         const data = doc.data();
 
         html += `
-        <div class="transaction-card" style="margin-bottom:15px;">
-            <strong>${data.fullname}</strong><br>
-            ${data.email}<br>
-            Balance: ₦${Number(data.balance).toLocaleString()}
-        </div>
-        `;
+<div class="transaction-card" style="margin-bottom:15px;">
+    <strong>${data.fullname}</strong><br>
+    ${data.email}<br>
+    Balance: ₦<span id="balance-${doc.id}">${Number(data.balance).toLocaleString()}</span><br><br>
+
+    <input
+        type="number"
+        id="amount-${doc.id}"
+        placeholder="New Balance"
+        style="padding:8px;border-radius:8px;width:150px;"
+    >
+
+    <button
+        class="action-btn updateBalanceBtn"
+        data-id="${doc.id}"
+    >
+        Update Balance
+    </button>
+</div>
+`;
 
     });
 
