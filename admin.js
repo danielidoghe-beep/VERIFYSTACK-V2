@@ -79,7 +79,7 @@ logoutBtn.addEventListener("click", async () => {
 document.addEventListener("click", async (e) => {
 
     if (!e.target.classList.contains("updateBalanceBtn")) return;
-
+alert("Button clicked!");
     const userId = e.target.dataset.id;
 
     const amount = document.getElementById(`amount-${userId}`).value;
