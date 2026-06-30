@@ -82,11 +82,15 @@ return;
 
 try{
 
-await signInWithEmailAndPassword(auth,email,password);
+const userCredential = await signInWithEmailAndPassword(auth, email, password);
 
 alert("Login successful");
 
-window.location.href="dashboard.html";
+if (userCredential.user.email === "danielidoghe@gmail.com") {
+    window.location.href = "admin.html";
+} else {
+    window.location.href = "dashboard.html";
+}
 
 }catch(error){
 
