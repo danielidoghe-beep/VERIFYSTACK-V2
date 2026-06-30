@@ -7,7 +7,9 @@ import {
 
 import {
     collection,
-    getDocs
+    getDocs,
+    doc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const ADMIN_EMAIL = "danielidoghe@gmail.com";
@@ -72,5 +74,36 @@ logoutBtn.addEventListener("click", async () => {
     await signOut(auth);
 
     window.location.href = "login.html";
+
+});
+document.addEventListener("click", async (e) => {
+
+    if (!e.target.classList.contains("updateBalanceBtn")) return;
+
+    const userId = e.target.dataset.id;
+
+    const amount = document.getElementById(`amount-${userId}`).value;
+
+    if (amount === "") {
+        alert("Enter a balance");
+        return;
+    }
+
+    try {
+
+        await updateDoc(doc(db, "users", userId), {
+            balance: Number(amount)
+        });
+
+        document.getElementById(`balance-${userId}`).innerText =
+            Number(amount).toLocaleString();
+
+        alert("Balance updated successfully!");
+
+    } catch (error) {
+
+        alert(error.message);
+
+    }
 
 });
