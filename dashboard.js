@@ -80,13 +80,16 @@ document.querySelector(".section").innerHTML = `
 ${html}
 `;
     }
-const logoutBtn = document.getElementById("logoutBtn");
+const const logoutBtn = document.getElementById("logoutBtn");
 
-logoutBtn.addEventListener("click", async () => {
+if (logoutBtn) {
 
-    await signOut(auth);
+    logoutBtn.addEventListener("click", async () => {
 
-    window.location.href = "login.html";
+        await signOut(auth);
 
-});
-});
+        window.location.href = "login.html";
+
+    });
+
+}
