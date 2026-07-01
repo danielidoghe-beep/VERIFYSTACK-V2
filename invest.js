@@ -8,12 +8,15 @@ import {
     updateDoc,
     addDoc,
     collection,
-    serverTimestamp
+    serverTimestamp,
+    query,
+    where,
+    getDocs
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 let currentUser = null;
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, async (user) => {
 
     if (!user) {
         window.location.href = "login.html";
@@ -21,7 +24,45 @@ onAuthStateChanged(auth, (user) => {
     }
 
     currentUser = user;
+try {
 
+    const q = query(
+        collection(db, "investments"),
+        where("uid", "==", currentUser.uid),
+        where("status", "==", "Active")
+    );
+
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+
+        const investment = snapshot.docs[0].data();
+
+        document.getElementById("activePlan").innerText =
+            investment.plan;
+
+        document.getElementById("activeAmount").innerText =
+            "Amount: ₦" + Number(investment.amount).toLocaleString();
+
+        const expectedProfit =
+            investment.amount + (investment.amount * investment.profit / 100);
+
+        document.getElementById("activeProfit").innerText =
+            "Expected Return: ₦" + expectedProfit.toLocaleString();
+
+        document.getElementById("activeDuration").innerText =
+            "Duration: " + investment.duration + " Days";
+
+        document.getElementById("activeStatus").innerText =
+            "Status: " + investment.status;
+
+    }
+
+} catch (error) {
+
+    console.log(error);
+
+}
 });
 
 document.addEventListener("click", async (e) => {
