@@ -69,3 +69,33 @@ copyBtn.addEventListener("click", () => {
     alert("Account number copied!");
 
 });
+const whatsappBtn = document.getElementById("whatsappBtn");
+
+whatsappBtn.addEventListener("click", () => {
+
+    const amount = document.getElementById("depositAmount").value;
+
+    if (amount === "") {
+        alert("Please enter your deposit amount first.");
+        return;
+    }
+
+    const message =
+`Hello VERIFYSTACK.
+
+I have made a deposit.
+
+Amount: ₦${amount}
+
+Email: ${currentUser.email}
+
+I am sending my payment proof below.`;
+
+    const phone = "2349117412352;
+
+    window.open(
+        `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+        "_blank"
+    );
+
+});
