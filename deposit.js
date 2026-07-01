@@ -28,8 +28,7 @@ depositBtn.addEventListener("click", async () => {
     const amount = document.getElementById("depositAmount").value;
 
     const method = document.getElementById("paymentMethod").value;
-const proofLink = document.getElementById("proofLink").value.trim();
-    if (amount === "" || method === "" || proofLink === "") {
+    if (amount === "" || method === "") {
     alert("Please fill all fields.");
     return;
 }
@@ -42,7 +41,6 @@ const proofLink = document.getElementById("proofLink").value.trim();
     email: currentUser.email,
     amount: Number(amount),
     paymentMethod: method,
-    proofLink: proofLink,
     status: "Pending",
     createdAt: serverTimestamp()
 
@@ -52,7 +50,6 @@ const proofLink = document.getElementById("proofLink").value.trim();
 
         document.getElementById("depositAmount").value = "";
         document.getElementById("paymentMethod").value = "";
-document.getElementById("proofLink").value = "";
     } catch (error) {
 
         alert(error.message);
