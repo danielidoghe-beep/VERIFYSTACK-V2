@@ -107,7 +107,15 @@ confirmBtn.addEventListener("click", () => {
             return;
         }
 
-        alert("Balance check successful.");
+        // Deduct balance
+
+await updateDoc(userRef, {
+
+    balance: balance - Number(product.price)
+
+});
+
+alert("Balance deducted successfully.");
 
     });
 
