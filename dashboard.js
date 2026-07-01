@@ -6,8 +6,14 @@ import {
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
 import {
-    doc,
-    getDoc
+doc,
+getDoc,
+collection,
+query,
+where,
+getDocs,
+orderBy,
+limit
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 onAuthStateChanged(auth, async (user) => {
@@ -28,12 +34,53 @@ onAuthStateChanged(auth, async (user) => {
 
         document.getElementById("balance").innerText =
             "₦" + Number(data.balance).toLocaleString();
+const q = query(
+    collection(db, "transactions"),
+    where("uid", "==", user.uid),
+    orderBy("createdAt", "desc"),
+    limit(5)
+);
 
-    }
+const snapshot = await getDocs(q);
+
+let html = "";
+
+snapshot.forEach((transaction) => {
+
+    const t = transaction.data();
+
+    html += `
+<div class="transaction-card">
+
+<strong>${t.type}</strong><br>
+
+₦${Number(t.amount).toLocaleString()}
+
+</div>
+<br>
+`;
 
 });
 
-const logoutBtn = document.getElementById("logoutBtn");
+if (html === "") {
+
+    html = `
+<div class="transaction-card">
+
+No transaction yet.
+
+</div>
+`;
+
+}
+
+document.querySelector(".section").innerHTML = `
+<h3>Recent Transactions</h3>
+
+${html}
+`;
+    }
+const const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
 
