@@ -59,11 +59,12 @@ async function loadProducts() {
                 <br><br>
 
                 <button
-                class="primary-btn">
+class="primary-btn"
+onclick="window.location.href='purchase.html?id=${doc.id}'">
 
-                🛒 Buy Now
+🛒 Buy Now
 
-                </button>
+</button>
 
             </div>
 
