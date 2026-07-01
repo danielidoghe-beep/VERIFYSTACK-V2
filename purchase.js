@@ -3,7 +3,10 @@ import { db } from "./firebase.js";
 import {
     doc,
     getDoc,
-    updateDoc
+    updateDoc,
+    addDoc,
+    collection,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 import {
@@ -119,8 +122,38 @@ await updateDoc(productRef, {
     sold: true
 
 });
+await addDoc(collection(db, "orders"), {
 
-alert("Purchase completed successfully!");
+    uid: user.uid,
+
+    productId: productId,
+
+    title: product.title,
+
+    price: product.price,
+
+    email: product.email,
+
+    password: product.password,
+
+    purchasedAt: serverTimestamp()
+
+});
+container.innerHTML = `
+
+<div class="transaction-card">
+
+<h2>✅ Purchase Successful</h2>
+
+<p><strong>Product:</strong> ${product.title}</p>
+
+<p><strong>Login Email:</strong><br>${product.email}</p>
+
+<p><strong>Password:</strong><br>${product.password}</p>
+
+</div>
+
+`;
 alert("Balance deducted successfully.");
 
     });
