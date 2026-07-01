@@ -28,30 +28,31 @@ depositBtn.addEventListener("click", async () => {
     const amount = document.getElementById("depositAmount").value;
 
     const method = document.getElementById("paymentMethod").value;
-
-    if (amount === "" || method === "") {
-        alert("Please fill all fields.");
-        return;
-    }
+const proofLink = document.getElementById("proofLink").value.trim();
+    if (amount === "" || method === "" || proofLink === "") {
+    alert("Please fill all fields.");
+    return;
+}
 
     try {
 
         await addDoc(collection(db, "deposits"), {
 
-            uid: currentUser.uid,
-            email: currentUser.email,
-            amount: Number(amount),
-            paymentMethod: method,
-            status: "Pending",
-            createdAt: serverTimestamp()
+    uid: currentUser.uid,
+    email: currentUser.email,
+    amount: Number(amount),
+    paymentMethod: method,
+    proofLink: proofLink,
+    status: "Pending",
+    createdAt: serverTimestamp()
 
-        });
+});
 
         alert("Deposit request submitted successfully!");
 
         document.getElementById("depositAmount").value = "";
         document.getElementById("paymentMethod").value = "";
-
+document.getElementById("proofLink").value = "";
     } catch (error) {
 
         alert(error.message);
