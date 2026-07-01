@@ -2,8 +2,17 @@ import { db } from "./firebase.js";
 
 import {
     doc,
-    getDoc
+    getDoc,
+    updateDoc
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
+
+import {
+    auth
+} from "./firebase.js";
+
+import {
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.15.0/firebase-auth.js";
 
 const container = document.getElementById("purchaseContainer");
 
@@ -69,7 +78,40 @@ async function loadProduct() {
         </div>
 
         `;
+const confirmBtn = document.getElementById("confirmPurchase");
 
+confirmBtn.addEventListener("click", () => {
+
+    onAuthStateChanged(auth, async (user) => {
+
+        if (!user) {
+            alert("Please login.");
+            return;
+        }
+
+        const userRef = doc(db, "users", user.uid);
+
+        const userSnap = await getDoc(userRef);
+
+        if (!userSnap.exists()) {
+            alert("User not found.");
+            return;
+        }
+
+        const userData = userSnap.data();
+
+        const balance = Number(userData.balance || 0);
+
+        if (balance < Number(product.price)) {
+            alert("Insufficient balance.");
+            return;
+        }
+
+        alert("Balance check successful.");
+
+    });
+
+});
     } catch (error) {
 
         console.log(error);
