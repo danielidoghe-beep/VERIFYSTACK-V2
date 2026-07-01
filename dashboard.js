@@ -33,7 +33,7 @@ onAuthStateChanged(auth, async (user) => {
             "Welcome back, " + data.fullname + " 👋";
 
         document.getElementById("balance").innerText =
-            "₦" + Number(data.balance).toLocaleString();
+    "₦" + Number(data["Total balance"] || 0).toLocaleString();
 const q = query(
     collection(db, "transactions"),
     where("uid", "==", user.uid),
