@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Deposit | VERIFYSTACK</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<header class="top-bar">
+
+<h2>Deposit Funds</h2>
+
+</header>
+
+<div class="wallet-card">
+
+<p>Make a Deposit</p>
+
+<h1>₦0</h1>
+
+<span>Complete the form below</span>
+
+</div>
+
+<div class="section">
+
+<input
+type="number"
+id="depositAmount"
+class="input"
+placeholder="Enter Deposit Amount">
+
+<select id="paymentMethod" class="input">
+
+<option value="">Select Payment Method</option>
+
+<option value="Bank Transfer">Bank Transfer</option>
+
+<option value="Crypto (USDT)">Crypto (USDT)</option>
+
+</select>
+
+<input
+type="file"
+id="paymentProof"
+class="input">
+
+<button
+id="submitDepositBtn"
+class="primary-btn">
+
+Submit Deposit
+
+</button>
+
+</div>
+
+</div>
+
+<script type="module" src="./deposit.js"></script>
+
+</body>
+
+</html>
