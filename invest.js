@@ -75,6 +75,18 @@ document.addEventListener("click", async (e) => {
     }
 
     const plan = e.target.dataset.plan;
+    const activeQuery = query(
+    collection(db, "investments"),
+    where("uid", "==", currentUser.uid),
+    where("status", "==", "Active")
+);
+
+const activeSnapshot = await getDocs(activeQuery);
+
+if (!activeSnapshot.empty) {
+    alert("You already have an active investment. Please wait until it is completed.");
+    return;
+}
     const amount = Number(e.target.dataset.amount);
     const profit = Number(e.target.dataset.profit);
     const days = Number(e.target.dataset.days);
