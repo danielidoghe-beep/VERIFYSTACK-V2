@@ -9,36 +9,39 @@ import {
 
 const container = document.getElementById("facebookProducts");
 
-async function loadFacebookAccounts() {
+async function loadProducts() {
 
-    try {
+    const q = query(
+        collection(db, "products"),
+        where("category", "==", "Facebook"),
+        where("sold", "==", false)
+    );
 
-        const q = query(
-            collection(db, "products"),
-            where("category", "==", "Facebook"),
-            where("sold", "==", false)
-        );
+    const snapshot = await getDocs(q);
 
-        const snapshot = await getDocs(q);
+    let html = "";
 
-        let html = "";
+    if (snapshot.empty) {
 
-        if (snapshot.empty) {
-
-            html = `
-            <div class="transaction-card">
+        html = `
+        <div class="transaction-card">
             No Facebook accounts available.
-            </div>
-            `;
+        </div>
+        `;
 
-        } else {
+    } else {
 
-            snapshot.forEach((doc) => {
+        snapshot.forEach((doc) => {
 
-                const product = doc.data();
+            const product = doc.data();
 
-                html += `
-                <div class="transaction-card">
+            html += `
+
+            <div class="transaction-card">
+
+                <img
+                src="${product.image}"
+                style="width:100%;border-radius:10px;margin-bottom:10px;">
 
                 <h3>${product.title}</h3>
 
@@ -46,29 +49,34 @@ async function loadFacebookAccounts() {
 
                 <h2>₦${Number(product.price).toLocaleString()}</h2>
 
-                <button class="primary-btn">
+                <button
+                class="action-btn">
 
                 👁 View Details
 
                 </button>
 
-                </div>
+                <br><br>
 
-                <br>
-                `;
+                <button
+                class="primary-btn">
 
-            });
+                🛒 Buy Now
 
-        }
+                </button>
 
-        container.innerHTML = html;
+            </div>
 
-    } catch (error) {
+            <br>
 
-        console.log(error);
+            `;
+
+        });
 
     }
 
+    container.innerHTML = html;
+
 }
 
-loadFacebookAccounts();
+loadProducts();
