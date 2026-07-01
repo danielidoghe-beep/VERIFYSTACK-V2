@@ -114,7 +114,13 @@ await updateDoc(userRef, {
     balance: balance - Number(product.price)
 
 });
+await updateDoc(productRef, {
 
+    sold: true
+
+});
+
+alert("Purchase completed successfully!");
 alert("Balance deducted successfully.");
 
     });
