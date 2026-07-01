@@ -1,1 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Referral | VERIFYSTACK</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<header class="top-bar">
+
+<h2>Referral Program</h2>
+
+</header>
+
+<div class="wallet-card">
+
+<h2>Invite Friends</h2>
+
+<p>
+
+Share your referral link and earn bonuses when someone joins VERIFYSTACK.
+
+</p>
+
+<input
+type="text"
+class="input"
+id="referralLink"
+readonly
+value="https://verifystack.com/ref/YOURCODE">
+
+<button
+id="copyReferralBtn"
+class="primary-btn">
+
+Copy Referral Link
+
+</button>
+
+</div>
+
+<nav class="bottom-nav">
+
+<div onclick="window.location.href='dashboard.html'">
+🏠<br>Home
+</div>
+
+<div onclick="window.location.href='wallet.html'">
+💳<br>Wallet
+</div>
+
+<div onclick="window.location.href='invest.html'">
+💼<br>Invest
+</div>
+
+<div onclick="window.location.href='support.html'">
+💬<br>Support
+</div>
+
+<div onclick="window.location.href='referral.html'">
+👥<br>Referral
+</div>
+
+</nav>
+
+</div>
+
+<script>
+
+document.getElementById("copyReferralBtn").addEventListener("click",()=>{
+
+const link=document.getElementById("referralLink");
+
+link.select();
+
+document.execCommand("copy");
+
+alert("Referral link copied!");
+
+});
+
+</script>
+
+</body>
+
+</html>
