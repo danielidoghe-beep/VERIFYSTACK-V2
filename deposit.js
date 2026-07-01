@@ -71,7 +71,11 @@ copyBtn.addEventListener("click", () => {
 });
 const whatsappBtn = document.getElementById("whatsappBtn");
 
+alert("WhatsApp script loaded");
+
 whatsappBtn.addEventListener("click", () => {
+
+    alert("WhatsApp button clicked");
 
     const amount = document.getElementById("depositAmount").value;
 
