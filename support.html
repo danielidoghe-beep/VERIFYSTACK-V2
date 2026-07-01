@@ -1,1 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Support | VERIFYSTACK</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<header class="top-bar">
+
+<h2>Support</h2>
+
+</header>
+
+<div class="wallet-card">
+
+<h2>Need Help?</h2>
+
+<p>Our support team is available on WhatsApp.</p>
+
+<button
+id="supportBtn"
+class="primary-btn">
+
+Chat with Support
+
+</button>
+
+</div>
+
+<nav class="bottom-nav">
+
+<div onclick="window.location.href='dashboard.html'">
+🏠<br>Home
+</div>
+
+<div onclick="window.location.href='wallet.html'">
+💳<br>Wallet
+</div>
+
+<div onclick="window.location.href='invest.html'">
+💼<br>Invest
+</div>
+
+<div onclick="window.location.href='support.html'">
+💬<br>Support
+</div>
+
+<div onclick="window.location.href='referral.html'">
+👥<br>Referral
+</div>
+
+</nav>
+
+</div>
+
+<script>
+
+document.getElementById("supportBtn").addEventListener("click", () => {
+
+const phone = "2349117412352";
+
+const message =
+"Hello VERIFYSTACK Support, I need assistance.";
+
+window.location.href =
+`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+});
+
+</script>
+
+</body>
+
+</html>
