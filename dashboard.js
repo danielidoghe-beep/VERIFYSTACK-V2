@@ -80,7 +80,8 @@ document.querySelector(".section").innerHTML = `
 ${html}
 `;
     }
-const const logoutBtn = document.getElementById("logoutBtn");
+});
+    const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
 
