@@ -91,7 +91,7 @@ Email: ${currentUser.email}
 
 I am sending my payment proof below.`;
 
-    const phone = "2349117412352;
+    const phone = "2349117412352";
 
     window.open(
         `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
