@@ -59,3 +59,12 @@ depositBtn.addEventListener("click", async () => {
     }
 
 });
+const copyBtn = document.getElementById("copyAccountBtn");
+
+copyBtn.addEventListener("click", () => {
+
+    navigator.clipboard.writeText("8135834452");
+
+    alert("Account number copied!");
+
+});
