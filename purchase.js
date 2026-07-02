@@ -139,7 +139,22 @@ await addDoc(collection(db, "orders"), {
     purchasedAt: serverTimestamp()
 
 });
-container.innerHTML = `
+await addDoc(collection(db, "transactions"), {
+
+    uid: user.uid,
+
+    type: "Purchase",
+
+    title: product.title,
+
+    amount: Number(product.price),
+
+    status: "Completed",
+
+    createdAt: serverTimestamp()
+
+});
+        container.innerHTML = `
 
 <div class="transaction-card">
 
