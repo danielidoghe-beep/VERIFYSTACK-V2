@@ -80,43 +80,46 @@ await loadAnnouncements();
 });
     async function loadAnnouncements() {
 
-    const snapshot = await getDocs(collection(db, "announcements"));
+    try {
 
-    let html = "";
+        const snapshot = await getDocs(collection(db, "announcements"));
 
-    if (snapshot.empty) {
+        let html = "";
 
-        html = `
-<div class="transaction-card">
+        if (snapshot.empty) {
 
-No announcements yet.
+            html = `
+            <div class="transaction-card">
+                No announcements yet.
+            </div>
+            `;
 
-</div>
-`;
+        } else {
 
-    } else {
+            snapshot.forEach((doc) => {
 
-        snapshot.forEach((doc) => {
+                const announcement = doc.data();
 
-            const announcement = doc.data();
+                html += `
+                <div class="transaction-card">
+                    <strong>📢 ${announcement.title}</strong>
+                    <p>${announcement.message}</p>
+                </div>
+                <br>
+                `;
 
-            html += `
-<div class="transaction-card">
+            });
 
-<strong>📢 ${announcement.title}</strong>
+        }
 
-<p>${announcement.message}</p>
+        document.getElementById("announcementContainer").innerHTML = html;
 
-</div>
+    } catch (error) {
 
-<br>
-`;
-
-        });
+        alert("Announcement Error:\n\n" + error.message);
+        console.error(error);
 
     }
-
-    document.getElementById("announcementContainer").innerHTML = html;
 
 }
 const logoutBtn = document.getElementById("logoutBtn");
