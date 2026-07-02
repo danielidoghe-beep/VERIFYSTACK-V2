@@ -7,7 +7,6 @@ import {
     query,
     where,
     getDocs,
-    orderBy
 } from "https://www.gstatic.com/firebasejs/12.15.0/firebase-firestore.js";
 
 const container = document.getElementById("ordersContainer");
@@ -23,13 +22,11 @@ onAuthStateChanged(auth, async (user) => {
 
     const q = query(
 
-        collection(db, "orders"),
+    collection(db, "orders"),
 
-        where("uid", "==", user.uid),
+    where("uid", "==", user.uid)
 
-        orderBy("purchasedAt", "desc")
-
-    );
+);
 
     const snapshot = await getDocs(q);
 
