@@ -80,13 +80,7 @@ await loadAnnouncements();
 });
     async function loadAnnouncements() {
 
-    const q = query(
-        collection(db, "announcements"),
-        orderBy("createdAt", "desc"),
-        limit(8)
-    );
-
-    const snapshot = await getDocs(q);
+    const snapshot = await getDocs(collection(db, "announcements"));
 
     let html = "";
 
