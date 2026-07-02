@@ -170,7 +170,9 @@ await addDoc(collection(db, "transactions"), {
 </div>
 
 `;
-alert("Balance deducted successfully.");
+alert("✅ Purchase successful!\n\nYour account details have been saved in My Orders.");
+
+confirmBtn.innerText = "Purchased ✅";
 
     });
 
@@ -178,7 +180,8 @@ alert("Balance deducted successfully.");
     } catch (error) {
 
         console.log(error);
-
+confirmBtn.disabled = false;
+confirmBtn.innerText = "Confirm Purchase";
         container.innerHTML = `
         <div class="transaction-card">
         Error loading product.
