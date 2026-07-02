@@ -84,7 +84,8 @@ async function loadProduct() {
 const confirmBtn = document.getElementById("confirmPurchase");
 
 confirmBtn.addEventListener("click", () => {
-
+    confirmBtn.disabled = true;
+    confirmBtn.innerText = "Processing...";
     onAuthStateChanged(auth, async (user) => {
 
         if (!user) {
