@@ -74,14 +74,58 @@ No transaction yet.
 
 }
 
-document.querySelector(".section").innerHTML = `
-<h3>Recent Transactions</h3>
-
-${html}
-`;
+document.getElementById("recentTransactions").innerHTML = html;
+await loadAnnouncements();   
     }
 });
-    const logoutBtn = document.getElementById("logoutBtn");
+    async function loadAnnouncements() {
+
+    const q = query(
+        collection(db, "announcements"),
+        orderBy("createdAt", "desc"),
+        limit(8)
+    );
+
+    const snapshot = await getDocs(q);
+
+    let html = "";
+
+    if (snapshot.empty) {
+
+        html = `
+<div class="transaction-card">
+
+No announcements yet.
+
+</div>
+`;
+
+    } else {
+
+        snapshot.forEach((doc) => {
+
+            const announcement = doc.data();
+
+            html += `
+<div class="transaction-card">
+
+<strong>📢 ${announcement.title}</strong>
+
+<p>${announcement.message}</p>
+
+</div>
+
+<br>
+`;
+
+        });
+
+    }
+
+    document.getElementById("announcementContainer").innerHTML = html;
+
+}
+const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
 
