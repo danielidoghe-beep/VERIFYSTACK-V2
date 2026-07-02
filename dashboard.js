@@ -75,11 +75,13 @@ No transaction yet.
 }
 
 document.getElementById("recentTransactions").innerHTML = html;
-await loadAnnouncements();   
+  console.log("About to load announcements...");
+await loadAnnouncements();
+console.log("Finished loading announcements.");
     }
 });
     async function loadAnnouncements() {
-
+alert("loadAnnouncements() started");
     try {
 
         const snapshot = await getDocs(collection(db, "announcements"));
